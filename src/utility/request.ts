@@ -1,15 +1,15 @@
-// import * as localUser from "./localUser"
+import * as localUser from "./localUser"
 
 async function requester(
     url: RequestInfo | URL,
     method: string,
     data?: object | string | number
 ) {
-    // const accessToken = localUser.get("accessToken")
+    const accessToken = localUser.get("accessToken")
 
-    const headers = {}
+    const headers: { [key: string]: string } = {}
 
-    // if (accessToken) { headers["X-Authorization"] = accessToken }
+    if (accessToken) { headers["X-Authorization"] = accessToken }
 
     function makeRequest(
         url: RequestInfo | URL,
@@ -33,17 +33,19 @@ async function requester(
     try {
         const response = await makeRequest(url, method, data)
 
-        if (response.ok) {
-            const result = await response.json()
+        if (response.status !== 204) {
+            if (response.ok) {
+                const result = await response.json()
 
-            return result
-        } else {
-            const error = await response.json()
+                return result
+            } else {
+                const error = await response.json()
 
-            return error.message
+                return error.message
+            }
         }
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
