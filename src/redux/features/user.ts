@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
-import * as i from "../utility/interfaces"
+
+import * as i from "../../utility/interfaces"
 
 export const userSlice = createSlice({
     name: "user",

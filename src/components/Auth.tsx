@@ -1,17 +1,53 @@
 import { useState } from "react"
-import { useAppDispatch } from "../utility/redux hooks"
+import { useAppDispatch } from "../redux/redux hooks"
 import { useNavigate } from "react-router-dom"
+
 import * as service from "../utility/service"
 import * as localUser from "../utility/localUser"
-import * as userActions from "../features/user"
-import * as usersActions from "../features/users"
+import * as userActions from "../redux/features/user"
+import * as usersActions from "../redux/features/users"
 import * as i from "../utility/interfaces"
 
 export default function Auth() {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
+
+    const initialState = { username: "", password: "" }
+
+    const [inputs, setInputs] = useState(initialState)
+    const [errors, setErrors] = useState({ ...initialState, server: "" })
+
     const [isRegistering, setIsRegistering] = useState(true)
+
+    function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+        const { name, value } = event.target
+
+        setInputs({ ...inputs, [name]: value })
+        setErrors({ ...errors, server: "" })
+
+        validateInput(event)
+    }
+
+    function validateInput(event: React.ChangeEvent<HTMLInputElement>) {
+        const { name, value } = event.target
+
+        setErrors(state => {
+            const stateObject = { ...state, [name]: "" }
+
+            if (name === "username") {
+                if (value.length < 2 || value.length > 20) {
+                    stateObject[name] = "Username must be between 2 and 20 characters long."
+                }
+            } else if (name === "password") {
+                if (value.length < 5) {
+                    stateObject[name] = "Password must be at least 5 characters long."
+                }
+            }
+
+            return stateObject
+        })
+    }
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -30,9 +66,7 @@ export default function Auth() {
                 ) {
                     response = await service.login(formData) as i.User
                 } response = await service.login(formData)
-            } else {
-                response = await service.login(formData)
-            }
+            } else { response = await service.login(formData) }
 
             localUser.set(response as i.User)
 
@@ -43,12 +77,8 @@ export default function Auth() {
             dispatch(usersActions.setUsers(users))
 
             if (users.length > 0 && !users.find((user: i.User) => {
-                if (response === null) return
-
-                return user._id === response._id
-            })) {
-                dispatch(usersActions.addUser(response as i.User))
-            }
+                return response && user._id === response._id
+            })) { dispatch(usersActions.addUser(response as i.User)) }
 
             navigate("/")
         }
@@ -57,13 +87,24 @@ export default function Auth() {
 
     return <section>
         <form onSubmit={handleSubmit}>
-            <input type="text" name="username" />
-            <input type="password" name="password" />
+            <input type="text" name="username" value={inputs.username}
+                onChange={handleInputChange} onBlur={validateInput}
+            />
+
+            <input type="password" name="password" value={inputs.password}
+                onChange={handleInputChange} onBlur={validateInput}
+            />
 
             <div className="buttonsWrapper">
-                <button onClick={() => setIsRegistering(true)} >Register</button>
+                <button onClick={() => setIsRegistering(true)}>Register</button>
                 <button onClick={() => setIsRegistering(false)} >Login</button>
             </div>
         </form>
+
+        <div className="errorsWrapper">
+            {errors.username && <p className="error">{errors.username}</p>}
+            {errors.password && <p className="error">{errors.password}</p>}
+            {errors.server && <p className="error">{errors.server}</p>}
+        </div>
     </section>
 }

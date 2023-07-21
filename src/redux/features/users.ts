@@ -1,5 +1,6 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import * as i from "../utility/interfaces"
+import { createSlice } from "@reduxjs/toolkit"
+
+import * as i from "../../utility/interfaces"
 
 export const usersSlice = createSlice({
     name: "users",
@@ -8,7 +9,7 @@ export const usersSlice = createSlice({
         setUsers: (state, { payload }) => {
             return state = payload
         },
-        addUser: (state, { payload }: PayloadAction<i.User>) => {
+        addUser: (state, { payload }) => {
             state.push(payload)
         },
         updateUser: (state, { payload }) => {
@@ -18,4 +19,5 @@ export const usersSlice = createSlice({
 })
 
 export const { setUsers, addUser, updateUser } = usersSlice.actions
+
 export default usersSlice.reducer

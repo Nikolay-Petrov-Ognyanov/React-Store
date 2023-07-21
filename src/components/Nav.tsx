@@ -1,11 +1,11 @@
 import { NavLink, useNavigate } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../utility/redux hooks"
+import { useAppDispatch, useAppSelector } from "../redux/redux hooks"
 
-import * as localUser from "../utility/localUser"
-import * as service from "../utility/service"
 import * as i from "../utility/interfaces"
-
-import * as userActions from "../features/user"
+import * as service from "../utility/service"
+import * as localUser from "../utility/localUser"
+import * as userActions from "../redux/features/user"
+import * as usersActions from "../redux/features/users"
 
 export default function Nav() {
     const dispatch = useAppDispatch()
@@ -18,6 +18,7 @@ export default function Nav() {
             await service.logout({ accessToken: user.accessToken })
 
             dispatch(userActions.setUser(null))
+            dispatch(usersActions.setUsers([]))
 
             localStorage.clear()
 

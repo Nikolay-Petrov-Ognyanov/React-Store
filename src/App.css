@@ -108,6 +108,10 @@ button:hover,
 	font-size: 4vw;
 }
 
+.error {
+	font-size: 3vw;
+}
+
 section {
 	display: flex;
 	flex-direction: column;
