@@ -12,7 +12,6 @@ export default function Auth() {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-
     const initialState = { username: "", password: "" }
 
     const [inputs, setInputs] = useState(initialState)
@@ -80,7 +79,7 @@ export default function Auth() {
                 return response && user._id === response._id
             })) { dispatch(usersActions.addUser(response as i.User)) }
 
-            navigate("/")
+            navigate("/catalog")
         }
     }
 
@@ -96,8 +95,9 @@ export default function Auth() {
             />
 
             <div className="buttonsWrapper">
-                <button onClick={() => setIsRegistering(true)}>Register</button>
-                <button onClick={() => setIsRegistering(false)} >Login</button>
+                <button className="button" onClick={() => setIsRegistering(true)}>Register</button>
+
+                <button className="button" onClick={() => setIsRegistering(false)}>Login</button>
             </div>
         </form>
 

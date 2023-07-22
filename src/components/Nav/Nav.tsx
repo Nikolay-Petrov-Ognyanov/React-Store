@@ -1,11 +1,13 @@
 import { NavLink, useNavigate } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../redux/redux hooks"
+import { useAppDispatch, useAppSelector } from "../../redux/redux hooks"
 
-import * as i from "../utility/interfaces"
-import * as service from "../utility/service"
-import * as localUser from "../utility/localUser"
-import * as userActions from "../redux/features/user"
-import * as usersActions from "../redux/features/users"
+import * as i from "../../utility/interfaces"
+import * as service from "../../utility/service"
+import * as localUser from "../../utility/localUser"
+import * as userActions from "../../redux/features/user"
+import * as usersActions from "../../redux/features/users"
+
+import style from "./Nav.module.css"
 
 export default function Nav() {
     const dispatch = useAppDispatch()
@@ -26,11 +28,11 @@ export default function Nav() {
         }
     }
 
-    return <> {localUser.get() ? <nav>
-        <NavLink to={"/"} className="button">Catalog</NavLink>
+    return <> {localUser.get() ? <nav className={style.nav}>
+        <NavLink to={"/catalog"} className="button">Catalog</NavLink>
         <NavLink to={"/cart"} className="button">Cart</NavLink>
         <NavLink to={"/profile"} className="button">Profile</NavLink>
 
-        <button onClick={handleLogout}>Logout</button>
+        <button className="button" onClick={handleLogout}>Logout</button>
     </nav> : <h1>Sign in</h1>} </>
 }

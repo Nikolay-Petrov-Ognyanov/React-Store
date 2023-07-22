@@ -1,0 +1,7 @@
+.nav {
+    width: 100vw;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 0.5vw;
+}

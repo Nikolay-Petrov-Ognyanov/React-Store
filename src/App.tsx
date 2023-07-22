@@ -5,9 +5,10 @@ import { useAppDispatch, useAppSelector } from "./redux/redux hooks"
 import * as localUser from "./utility/localUser"
 import * as userActions from "./redux/features/user"
 import Auth from "./components/Auth"
-import Nav from "./components/Nav"
-import Catalog from "./components/Catalog"
+import Nav from "./components/Nav/Nav"
+import Catalog from "./components/Catalog/Catalog"
 import Guard from "./components/Guard"
+import Category from "./components/Category/Category"
 
 export default function App() {
 	const dispatch = useAppDispatch()
@@ -25,7 +26,9 @@ export default function App() {
 			<Route path="/auth" element={<Auth />} />
 
 			<Route element={<Guard />}>
-				<Route path="/" element={<Catalog />} />
+				<Route path="/catalog" element={<Catalog />} />
+				<Route path="/catalog/:category" element={<Category />} />
+				<Route path="*" element={<Catalog />} />
 			</Route>
 		</Routes>
 	</div>

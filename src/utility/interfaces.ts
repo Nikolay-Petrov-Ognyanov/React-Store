@@ -3,3 +3,7 @@ export interface User {
     _id?: string,
     accessToken?: string
 }
+
+export interface CategoryCard {
+    name: string
+}
