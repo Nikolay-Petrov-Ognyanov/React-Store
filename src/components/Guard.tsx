@@ -1,6 +1,6 @@
 import { Navigate, useLocation, Outlet } from "react-router-dom"
 
-import * as localUser from "../utility/localUser"
+import * as localUser from "../common/localUser"
 
 export default function Guard() {
     const location = useLocation()

@@ -2,11 +2,11 @@ import { useState } from "react"
 import { useAppDispatch } from "../redux/redux hooks"
 import { useNavigate } from "react-router-dom"
 
-import * as service from "../utility/service"
-import * as localUser from "../utility/localUser"
+import * as service from "../common/service"
+import * as localUser from "../common/localUser"
 import * as userActions from "../redux/features/user"
 import * as usersActions from "../redux/features/users"
-import * as i from "../utility/interfaces"
+import * as i from "../common/interfaces"
 
 export default function Auth() {
     const dispatch = useAppDispatch()

@@ -1,9 +1,9 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../redux/redux hooks"
 
-import * as i from "../../utility/interfaces"
-import * as service from "../../utility/service"
-import * as localUser from "../../utility/localUser"
+import * as i from "../../common/interfaces"
+import * as service from "../../common/service"
+import * as localUser from "../../common/localUser"
 import * as userActions from "../../redux/features/user"
 import * as usersActions from "../../redux/features/users"
 
@@ -30,7 +30,6 @@ export default function Nav() {
 
     return <> {localUser.get() ? <nav className={style.nav}>
         <NavLink to={"/catalog"} className="button">Catalog</NavLink>
-        <NavLink to={"/cart"} className="button">Cart</NavLink>
         <NavLink to={"/profile"} className="button">Profile</NavLink>
 
         <button className="button" onClick={handleLogout}>Logout</button>

@@ -1,15 +1,22 @@
+import style from "./Card.module.css"
+
+import * as i from "../../common/interfaces"
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { faCircleMinus } from '@fortawesome/free-solid-svg-icons'
 
-import style from "./FoodCard.module.css"
-
-
-export default function Card() {
+export default function Card({ category }: i.CardProps) {
 
 
     return <div className={style.card}>
-        <span>Food</span> <span>Price</span>
+        <span>
+            {category.title}
+        </span>
+
+        <span>
+            {category.price}
+        </span>
 
         <div className={style.icons_container}>
             <FontAwesomeIcon
