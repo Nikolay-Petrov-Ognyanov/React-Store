@@ -1,30 +1,30 @@
 export const categories = [
     {
-        title: "Fruits",
+        name: "Fruits",
         amount: 1,
         unit: "kg",
         price: 2
     },
     {
-        title: "Vegetables",
+        name: "Vegetables",
         amount: 1,
         unit: "kg",
         price: 3
     },
     {
-        title: "Grains",
+        name: "Grains",
         amount: 1,
         unit: "kg",
         price: 3
     },
     {
-        title: "Beans",
+        name: "Beans",
         amount: 1,
         unit: "kg",
         price: 4
     },
     {
-        title: "Mushrooms",
+        name: "Mushrooms",
         amount: 1,
         unit: "kg",
         price: 3

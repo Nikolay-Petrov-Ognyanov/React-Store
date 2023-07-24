@@ -1,12 +1,14 @@
+import style from "./Auth.module.css"
+
 import { useState } from "react"
-import { useAppDispatch } from "../redux/redux hooks"
+import { useAppDispatch } from "../../redux/redux hooks"
 import { useNavigate } from "react-router-dom"
 
-import * as service from "../common/service"
-import * as localUser from "../common/localUser"
-import * as userActions from "../redux/features/user"
-import * as usersActions from "../redux/features/users"
-import * as i from "../common/interfaces"
+import * as service from "../../common/service"
+import * as localUser from "../../common/localUser"
+import * as userActions from "../../redux/features/user"
+import * as usersActions from "../../redux/features/users"
+import * as i from "../../common/interfaces"
 
 export default function Auth() {
     const dispatch = useAppDispatch()
@@ -83,21 +85,36 @@ export default function Auth() {
         }
     }
 
-
     return <section>
         <form onSubmit={handleSubmit}>
-            <input type="text" name="username" value={inputs.username}
-                onChange={handleInputChange} onBlur={validateInput}
+            <input
+                type="text"
+                name="username"
+                className={style.input}
+                value={inputs.username}
+                onChange={handleInputChange}
+                onBlur={validateInput}
             />
 
-            <input type="password" name="password" value={inputs.password}
-                onChange={handleInputChange} onBlur={validateInput}
+            <input
+                type="password"
+                name="password"
+                className={style.input}
+                value={inputs.password}
+                onChange={handleInputChange}
+                onBlur={validateInput}
             />
 
             <div className="buttonsWrapper">
-                <button className="button" onClick={() => setIsRegistering(true)}>Register</button>
+                <button
+                    className={style.button}
+                    onClick={() => setIsRegistering(true)}
+                >Register</button>
 
-                <button className="button" onClick={() => setIsRegistering(false)}>Login</button>
+                <button
+                    className={style.button}
+                    onClick={() => setIsRegistering(false)}
+                >Login</button>
             </div>
         </form>
 

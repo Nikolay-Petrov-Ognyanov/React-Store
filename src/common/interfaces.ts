@@ -5,12 +5,12 @@ export interface User {
 }
 
 export interface Category {
-    title: string,
+    name: string,
     amount: number,
     unit: string,
     price: number
 }
 
-export interface CardProps{
+export interface CardProps {
     category: Category
 }

@@ -1,35 +1,27 @@
 import style from "./Card.module.css"
 
+import { useState } from "react"
+
 import * as i from "../../common/interfaces"
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
-import { faCircleMinus } from '@fortawesome/free-solid-svg-icons'
-
 export default function Card({ category }: i.CardProps) {
+    const [amount, setAmount] = useState("")
 
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const regex = /^[0-9]*\.?[0-9]*$/
+        const input = event.target.value
+
+        if (regex.test(input)) setAmount(input)
+    }
 
     return <div className={style.card}>
-        <span>
-            {category.title}
-        </span>
+        <span>{category.name}</span>
 
-        <span>
-            {category.price}
-        </span>
-
-        <div className={style.icons_container}>
-            <FontAwesomeIcon
-                className={style.icon}
-                style={{ color: "black" }}
-                icon={faCirclePlus}
-            />
-
-            <FontAwesomeIcon
-                className={style.icon}
-                style={{ color: "black" }}
-                icon={faCircleMinus}
-            />
-        </div>
+        <input
+            name={category.name}
+            value={amount}
+            onChange={handleInputChange}
+            placeholder={`Amount(${category.unit})`}
+        />
     </div>
 }
