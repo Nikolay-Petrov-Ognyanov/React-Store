@@ -1,10 +1,16 @@
 import style from "./Card.module.css"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import * as i from "../../common/interfaces"
 
+import * as cartActions from "../../redux/features/cart"
+
+import { useAppDispatch } from "../../redux/redux hooks"
+
 export default function Card({ category }: i.CardProps) {
+    const dispatch = useAppDispatch()
+
     const [amount, setAmount] = useState("")
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,6 +19,13 @@ export default function Card({ category }: i.CardProps) {
 
         if (regex.test(input)) setAmount(input)
     }
+
+    useEffect(() => {
+        dispatch(cartActions.setCart({
+            name: (category.name as string).toLowerCase(),
+            amount: Number(amount)
+        }))
+    }, [amount])
 
     return <div className={style.card}>
         <span>{category.name}</span>

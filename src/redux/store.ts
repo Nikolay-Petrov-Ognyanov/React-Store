@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit"
 
 import user from "./features/user"
 import users from "./features/users"
+import cart from "./features/cart"
 
 const store = configureStore({
     reducer: {
         user,
         users,
+        cart
     }
 })
 
