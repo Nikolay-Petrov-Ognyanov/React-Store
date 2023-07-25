@@ -1,9 +1,13 @@
-import style from "./Catalog.module.css"
-import { categories } from "../../common/categories"
-
-import Card from "../Card/Card"
 import { useEffect, useState } from "react"
 import { useAppSelector } from "../../redux/redux hooks"
+
+import { categories } from "../../common/categories"
+
+import * as i from "../../common/interfaces"
+
+import Card from "../Card/Card"
+
+import style from "./Catalog.module.css"
 
 export default function Catalog() {
     const cart = useAppSelector(state => state.cart.value)
@@ -14,31 +18,25 @@ export default function Catalog() {
         cart && setTotalCost(Object.values(cart as object).reduce((a, b) => a + b))
     }, [cart])
 
-    function handleSubmit(event: React.FormEvent<HTMLElement>) {
-        event.preventDefault()
-
-        const formData = Object.fromEntries(
-            new FormData(event.target as HTMLFormElement)
-        )
-
-        console.log(Object.fromEntries(
-            Object.entries(formData).filter(value => value[1])
-        ))
+    function handleSubmit() {
+        console.log(cart)
     }
 
     return <section >
         <header className={style.header}>
-            <span>Name</span> <span>Price</span> <span>Amount(kg)</span>
+            <span>Category</span> <span>Price(BGN)</span> <span>Amount(kg)</span>
         </header>
 
-        <form onSubmit={handleSubmit} className={style.catalog}>
+        <div className={style.catalog}>
             {categories.map(category => <Card
                 key={category.name} category={category}
             />)}
 
-            <p>Total cost: {totalCost}</p>
+            <p>Total cost: {totalCost} BGN</p>
 
-            <button className={`${style.buy} button`}>Buy</button>
-        </form>
+            <button onClick={handleSubmit} className={`${totalCost
+                ? `${style.buy_active}` : `${style.buy_inactive}`} button`
+            }>Buy</button>
+        </div>
     </section>
 }
