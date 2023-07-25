@@ -6,7 +6,24 @@
     width: 96vw;
     overflow: hidden;
     margin-bottom: 1vw;
+}
+
+.name {
+    width: calc(92vw / 3);
+    text-align: center;
     padding: 0 2vw;
+}
+
+.price {
+    width: calc(92vw / 3);
+    text-align: center;
+    padding: 0 2vw;
+}
+
+.amount {
+    width: calc(92vw / 3);
+    padding: 0 2vw;
+    text-align: center;
 }
 
 .icons_container {

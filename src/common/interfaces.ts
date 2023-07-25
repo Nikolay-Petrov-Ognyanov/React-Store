@@ -5,10 +5,10 @@ export interface User {
 }
 
 export interface Category {
-    name?: string,
-    amount?: number,
-    unit?: string,
-    price?: number
+    name: string,
+    amount: number,
+    unit: string,
+    price: number
 }
 
 export interface CardProps {

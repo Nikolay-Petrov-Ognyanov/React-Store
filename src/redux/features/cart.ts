@@ -9,9 +9,9 @@ export const cartSlice = createSlice({
     } as i.Cart,
     reducers: {
         setCart: (state, { payload }) => {
-            const { name, amount } = payload
+            const { name, price } = payload
 
-            state.value = { ...state.value, [name]: amount }
+            state.value = { ...state.value, [name]: price }
         }
     }
 })

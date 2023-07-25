@@ -1,10 +1,17 @@
 .catalog {
     padding: 0 2vw;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
     justify-content: center;
+}
+
+.header {
+    justify-content: space-between;
+}
+
+.header * {
+    width: calc(92vw / 3);
 }
 
 .buy {
