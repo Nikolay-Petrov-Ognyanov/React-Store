@@ -7,7 +7,6 @@ export interface User {
 export interface Category {
     name: string,
     amount: number,
-    unit: string,
     price: number
 }
 
@@ -17,9 +16,24 @@ export interface CardProps {
 
 export interface Cart {
     value?: object | null,
-    fruits?: number,
-    vegetables?: number,
-    grains?: number,
-    beans?: number,
-    mushrooms?: number,
+    fruits?: {
+        amount: number,
+        price: number
+    },
+    vegetables?: {
+        amount: number,
+        price: number
+    },
+    grains?: {
+        amount: number,
+        price: number
+    },
+    beans?: {
+        amount: number,
+        price: number
+    },
+    mushrooms?: {
+        amount: number,
+        price: number
+    },
 }

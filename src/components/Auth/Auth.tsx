@@ -64,10 +64,8 @@ export default function Auth() {
                 if (
                     response && "message" in response
                     && response.message === "Username is taken."
-                ) {
-                    response = await service.login(formData) as i.User
-                } response = await service.login(formData)
-            } else { response = await service.login(formData) }
+                ) response = await service.login(formData)
+            } else response = await service.login(formData)
 
             localUser.set(response as i.User)
 

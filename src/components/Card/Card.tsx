@@ -22,6 +22,7 @@ export default function Card({ category }: i.CardProps) {
     useEffect(() => {
         dispatch(cartActions.setCart({
             name: (category.name as string).toLowerCase(),
+            amount: Number(amount),
             price: Number(amount) * Number(category.price)
         }))
     }, [amount])
@@ -30,7 +31,7 @@ export default function Card({ category }: i.CardProps) {
         <span className={style.name}>{category.name}</span>
 
         <span className={style.price}>
-            {amount ? amount * category.price : `${category.price} / ${category.unit}`}
+            {amount ? amount * category.price : `${category.price} / kg`}
         </span>
 
         <input
@@ -38,7 +39,7 @@ export default function Card({ category }: i.CardProps) {
             name={category.name}
             value={amount}
             onChange={handleInputChange}
-            placeholder={`Amount(${category.unit})`}
+            placeholder={`Amount(kg)`}
         />
     </div>
 }
