@@ -1,11 +1,14 @@
 import style from "./Card.module.css"
 import { useEffect, useState } from "react"
-import { useAppDispatch } from "../../redux/redux hooks"
+import { useAppDispatch, useAppSelector } from "../../redux/redux hooks"
 import * as i from "../../common/interfaces"
 import * as cartActions from "../../redux/features/cart"
+import { RootState } from "../../redux/store"
 
 export default function Card({ category }: i.CardProps) {
     const dispatch = useAppDispatch()
+
+    const user = useAppSelector((state: RootState) => state.user.value)
 
     const [amount, setAmount] = useState(0)
 
@@ -23,6 +26,8 @@ export default function Card({ category }: i.CardProps) {
             price: Number(amount) * Number(category.price)
         }))
     }, [amount])
+
+    useEffect(() => setAmount(0), [user])
 
     return <div className={style.card}>
         <span className={style.name}>{category.name}</span>

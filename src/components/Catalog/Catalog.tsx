@@ -32,10 +32,8 @@ export default function Catalog() {
 
         const currentUser: i.User = { ...user }
 
-        let updatedUser: i.User = {}
-
         if (currentUser.purchases) {
-            updatedUser = {
+            const updatedUser: i.User = {
                 ...currentUser,
                 purchases: {
                     fruits: currentUser.purchases.fruits + purchase.fruits,
@@ -43,22 +41,6 @@ export default function Catalog() {
                     grains: currentUser.purchases.grains + purchase.grains,
                     beans: currentUser.purchases.beans + purchase.beans,
                     mushrooms: currentUser.purchases.mushrooms + purchase.mushrooms,
-                }
-            }
-
-            await service.updateUser(updatedUser)
-            dispatch(userActions.setUser(updatedUser))
-            dispatch(usersActions.updateUser(updatedUser))
-            localUser.set(updatedUser)
-        } else {
-            updatedUser = {
-                ...currentUser,
-                purchases: {
-                    fruits: purchase.fruits,
-                    vegetables: purchase.vegetables,
-                    grains: purchase.grains,
-                    beans: purchase.beans,
-                    mushrooms: purchase.mushrooms,
                 }
             }
 
