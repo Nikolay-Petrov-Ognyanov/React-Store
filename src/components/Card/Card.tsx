@@ -12,6 +12,8 @@ export default function Card({ category }: i.CardProps) {
 
     const [amount, setAmount] = useState(0)
 
+    useEffect(() => setAmount(0), [user])
+
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const regex = /^[0-9]*\.?[0-9]*$/
         const input = event.target.value
@@ -25,9 +27,7 @@ export default function Card({ category }: i.CardProps) {
             amount: Number(amount),
             price: Number(amount) * Number(category.price)
         }))
-    }, [amount])
-
-    useEffect(() => setAmount(0), [user])
+    }, [amount, category.name, category.price, dispatch])
 
     return <div className={style.card}>
         <span className={style.name}>{category.name}</span>

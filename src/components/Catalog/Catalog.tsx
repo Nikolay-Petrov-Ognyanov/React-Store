@@ -8,12 +8,13 @@ import * as service from "../../common/service"
 import * as userActions from "../../redux/features/user"
 import * as usersActions from "../../redux/features/users"
 import * as localUser from "../../common/localUser"
+import { RootState } from "../../redux/store"
 
 export default function Catalog() {
     const dispatch = useAppDispatch()
 
-    const user = useAppSelector(state => state.user.value)
-    const cart = useAppSelector(state => state.cart.value)
+    const user = useAppSelector((state: RootState) => state.user.value)
+    const cart = useAppSelector((state: RootState) => state.cart.value)
 
     const [totalCost, setTotalCost] = useState(0)
 

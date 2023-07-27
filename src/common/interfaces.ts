@@ -1,8 +1,9 @@
 export interface User {
-    value?: object | null
+    value?: object | null | undefined
     _id?: string,
     accessToken?: string,
     purchases?: Purchase
+    username?: string,
 }
 
 export interface Category {

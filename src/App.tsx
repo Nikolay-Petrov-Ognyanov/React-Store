@@ -8,6 +8,7 @@ import Auth from "./components/Auth/Auth"
 import Nav from "./components/Nav/Nav"
 import Catalog from "./components/Catalog/Catalog"
 import Guard from "./components/Guard"
+import Profile from "./components/Profile/Profile"
 
 export default function App() {
 	const dispatch = useAppDispatch()
@@ -26,6 +27,7 @@ export default function App() {
 
 			<Route element={<Guard />}>
 				<Route path="/catalog" element={<Catalog />} />
+				<Route path="/profile" element={<Profile />} />
 				<Route path="*" element={<Catalog />} />
 			</Route>
 		</Routes>
