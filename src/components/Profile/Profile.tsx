@@ -14,7 +14,7 @@ export default function Profile() {
         {purchases && Object.entries(purchases).map(category => {
             const name = category[0][0].toLocaleUpperCase() + category[0].slice(1)
 
-            return <p> {name}: {category[1]} kg</p>
+            return <p key={category[0]}>  {name}: {category[1]} kg</p>
         })}
     </section>
 }

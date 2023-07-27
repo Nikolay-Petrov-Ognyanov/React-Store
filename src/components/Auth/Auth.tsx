@@ -65,8 +65,6 @@ export default function Auth() {
                 ) response = await service.login(formData)
             } else response = await service.login(formData)
 
-            console.log(response)
-
             localUser.set(response as i.User)
 
             dispatch(userActions.setUser(response))
