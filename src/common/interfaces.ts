@@ -1,7 +1,8 @@
 export interface User {
     value?: object | null
     _id?: string,
-    accessToken?: string
+    accessToken?: string,
+    purchases?: Purchase
 }
 
 export interface Category {
@@ -36,4 +37,12 @@ export interface Cart {
         amount: number,
         price: number
     },
+}
+
+export interface Purchase {
+    fruits: number,
+    vegetables: number
+    grains: number,
+    beans: number,
+    mushrooms: number,
 }

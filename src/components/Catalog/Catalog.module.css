@@ -14,11 +14,11 @@
     width: calc(92vw / 3);
 }
 
-.buy_active {
+.purchase_active {
     margin: 1vw auto 0 auto;
 }
 
-.buy_inactive {
+.purchase_inactive {
     margin: 1vw auto 0 auto;
     pointer-events: none;
     color: rgba(153, 255, 0, 0.5);

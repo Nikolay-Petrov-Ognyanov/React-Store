@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-
 import * as i from "../../common/interfaces"
 
 export const userSlice = createSlice({

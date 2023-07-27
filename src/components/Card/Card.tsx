@@ -1,11 +1,8 @@
 import style from "./Card.module.css"
-
 import { useEffect, useState } from "react"
-
+import { useAppDispatch } from "../../redux/redux hooks"
 import * as i from "../../common/interfaces"
 import * as cartActions from "../../redux/features/cart"
-
-import { useAppDispatch } from "../../redux/redux hooks"
 
 export default function Card({ category }: i.CardProps) {
     const dispatch = useAppDispatch()

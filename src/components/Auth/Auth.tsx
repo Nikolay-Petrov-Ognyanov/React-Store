@@ -1,9 +1,7 @@
 import style from "./Auth.module.css"
-
 import { useState } from "react"
 import { useAppDispatch } from "../../redux/redux hooks"
 import { useNavigate } from "react-router-dom"
-
 import * as service from "../../common/service"
 import * as localUser from "../../common/localUser"
 import * as userActions from "../../redux/features/user"
@@ -67,6 +65,8 @@ export default function Auth() {
                 ) response = await service.login(formData)
             } else response = await service.login(formData)
 
+            console.log(response)
+
             localUser.set(response as i.User)
 
             dispatch(userActions.setUser(response))
@@ -77,7 +77,7 @@ export default function Auth() {
 
             if (users.length > 0 && !users.find((user: i.User) => {
                 return response && user._id === response._id
-            })) { dispatch(usersActions.addUser(response as i.User)) }
+            })) dispatch(usersActions.addUser(response as i.User))
 
             navigate("/catalog")
         }
@@ -106,6 +106,7 @@ export default function Auth() {
             <div className="buttonsWrapper">
                 <button
                     className={style.button}
+
                     onClick={() => setIsRegistering(true)}
                 >Register</button>
 

@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react"
-import { useAppSelector } from "../../redux/redux hooks"
-
-import { categories } from "../../common/categories"
-
-// import * as i from "../../common/interfaces"
-
-import Card from "../Card/Card"
-
-import * as i from "../../common/interfaces"
-
 import style from "./Catalog.module.css"
+import { useEffect, useState } from "react"
+import { useAppDispatch, useAppSelector } from "../../redux/redux hooks"
+import { categories } from "../../common/categories"
+import Card from "../Card/Card"
+import * as i from "../../common/interfaces"
+import * as service from "../../common/service"
+import * as userActions from "../../redux/features/user"
+import * as usersActions from "../../redux/features/users"
+import * as localUser from "../../common/localUser"
 
 export default function Catalog() {
+    const dispatch = useAppDispatch()
+
     const user = useAppSelector(state => state.user.value)
     const cart = useAppSelector(state => state.cart.value)
 
@@ -23,16 +23,50 @@ export default function Catalog() {
 
             setTotalCost(prices.reduce((a, b) => a + b))
         }
-
-        console.log(user)
     }, [cart])
 
-    function handleSubmit() {
-        const purchase = Object.fromEntries(Object.entries(cart as i.Cart).map(item => {
+    async function handleSubmit() {
+        const purchase: i.Purchase = Object.fromEntries(Object.entries(cart as i.Cart).map(item => {
             return [[item[0]], item[1].amount]
         }))
 
-        console.log(purchase)
+        const currentUser: i.User = { ...user }
+
+        let updatedUser: i.User = {}
+
+        if (currentUser.purchases) {
+            updatedUser = {
+                ...currentUser,
+                purchases: {
+                    fruits: currentUser.purchases.fruits + purchase.fruits,
+                    vegetables: currentUser.purchases.vegetables + purchase.vegetables,
+                    grains: currentUser.purchases.grains + purchase.grains,
+                    beans: currentUser.purchases.beans + purchase.beans,
+                    mushrooms: currentUser.purchases.mushrooms + purchase.mushrooms,
+                }
+            }
+
+            await service.updateUser(updatedUser)
+            dispatch(userActions.setUser(updatedUser))
+            dispatch(usersActions.updateUser(updatedUser))
+            localUser.set(updatedUser)
+        } else {
+            updatedUser = {
+                ...currentUser,
+                purchases: {
+                    fruits: purchase.fruits,
+                    vegetables: purchase.vegetables,
+                    grains: purchase.grains,
+                    beans: purchase.beans,
+                    mushrooms: purchase.mushrooms,
+                }
+            }
+
+            await service.updateUser(updatedUser)
+            dispatch(userActions.setUser(updatedUser))
+            dispatch(usersActions.updateUser(updatedUser))
+            localUser.set(updatedUser)
+        }
     }
 
     return <section >
@@ -48,8 +82,8 @@ export default function Catalog() {
             <p>Total cost: {totalCost} BGN</p>
 
             <button onClick={handleSubmit} className={`${totalCost
-                ? `${style.buy_active}` : `${style.buy_inactive}`} button`
-            }>Buy</button>
+                ? `${style.purchase_active}` : `${style.purchase_inactive}`} button`
+            }>Purchase</button>
         </div>
     </section>
 }

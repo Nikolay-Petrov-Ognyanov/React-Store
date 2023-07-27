@@ -1,13 +1,11 @@
+import style from "./Nav.module.css"
 import { NavLink, useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../redux/redux hooks"
-
 import * as i from "../../common/interfaces"
 import * as service from "../../common/service"
 import * as localUser from "../../common/localUser"
 import * as userActions from "../../redux/features/user"
 import * as usersActions from "../../redux/features/users"
-
-import style from "./Nav.module.css"
 
 export default function Nav() {
     const dispatch = useAppDispatch()

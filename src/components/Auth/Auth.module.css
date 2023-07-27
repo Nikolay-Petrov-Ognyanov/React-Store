@@ -24,6 +24,14 @@
     justify-content: center;
     align-items: center;
 }
+
+.button:hover {
+    cursor: pointer;
+    color: black;
+    background-color: var(--color);
+    border-color: var(--color);
+}
+
 .input {
     border: 0.25vw solid var(--color);
     width: 50vw;
