@@ -1,3 +1,4 @@
+// Import CSS file and required dependencies
 import "./App.css"
 import { useEffect } from "react"
 import { Routes, Route } from "react-router-dom"
@@ -10,26 +11,38 @@ import Catalog from "./components/Catalog/Catalog"
 import Guard from "./components/Guard"
 import Profile from "./components/Profile/Profile"
 
+// Define the App component
 export default function App() {
-	const dispatch = useAppDispatch()
+    // Redux hooks for dispatching actions and accessing state
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(state => state.user.value)
 
-	const user = useAppSelector(state => state.user.value)
+    // Effect hook to check for user data on component mount
+    useEffect(() => {
+        // Check if user data is not available and retrieve from local storage
+        if (!user && localUser.get()) {
+            // Dispatch action to set user data from local storage
+            dispatch(userActions.setUser(localUser.get()))
+        }
+    }, [dispatch, user])
 
-	useEffect(() => {
-		if (!user && localUser.get()) dispatch(userActions.setUser(localUser.get()))
-	}, [dispatch, user])
+    // JSX structure of the App component with routing and conditional rendering
+    return (
+        <div className="App">
+            {/* Render navigation component */}
+            <Nav />
 
-	return <div className="App">
-		<Nav />
+            {/* Define routes for authentication, catalog, profile, and fallback */}
+            <Routes>
+                <Route path="/auth" element={<Auth />} />
 
-		<Routes>
-			<Route path="/auth" element={<Auth />} />
-
-			<Route element={<Guard />}>
-				<Route path="/catalog" element={<Catalog />} />
-				<Route path="/profile" element={<Profile />} />
-				<Route path="*" element={<Catalog />} />
-			</Route>
-		</Routes>
-	</div>
+                {/* Use Guard component to protect routes */}
+                <Route element={<Guard />}>
+                    <Route path="/catalog" element={<Catalog />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="*" element={<Catalog />} />
+                </Route>
+            </Routes>
+        </div>
+    )
 }
